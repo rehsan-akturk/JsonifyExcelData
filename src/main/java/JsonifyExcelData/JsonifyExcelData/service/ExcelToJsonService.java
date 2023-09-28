@@ -34,14 +34,14 @@ public class ExcelToJsonService {
             Sheet sheet = workbook.getSheetAt(0);
 
             for (Row row : sheet) {
-                // JSON verisini oluştur
+                // create json data
                 Map<String, Object> data = new HashMap<>();
                 for (Cell cell : row) {
                     String cellValue = getCellValueAsString(cell);
                     data.put("column_" + cell.getColumnIndex(), cellValue);
                 }
 
-                // JSON verisini veritabanına kaydet
+                // insert json data
                 String jsonValue = new ObjectMapper().writeValueAsString(data);
 
                 JsonDataEntity entity = new JsonDataEntity(jsonValue);
